@@ -3,12 +3,12 @@
 This web app is used to control a virtual thermostat that is connected to physical temperature sensors and hvac controllers.
 
 ## APIs
-Thermostat API: <github.com/zbrogz/thermostatAPI>
+Thermostat API: http://github.com/zbrogz/thermostatAPI
 
-Hvac API: <github.com/zbrogz/hvacAPI>
+Hvac API: http://github.com/zbrogz/hvacAPI
 
-Temperature Sensor API <github.com/zbrogz/temperatureSensorAPI>
+Temperature Sensor API http://github.com/zbrogz/temperatureSensorAPI
 
 ## Devices
-Hvac Controller: <github.com/zbrogz/hvac>
-Temperature Sensor: <github.com/zbrogz/temperatureSensor>
+Hvac Controller: http://github.com/zbrogz/hvac
+Temperature Sensor: http://github.com/zbrogz/temperatureSensor
