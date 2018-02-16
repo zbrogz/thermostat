@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Thermostat</title>
+	<link rel="stylesheet" href="/styles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+	<link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+
+</head>
+<body>
+	<h1>Thermostat</h1>
+	<div class=main>
+		<p id='area'>Area</p>
+		<p class="big">Desired Temperature</p>
+		<button id=increase>+</button>
+		<p id='desired_temp'>00&#x00B0</p>
+		<button id=decrease>-</button><br><br>
+		<p class="big">Current Temperature</p>
+		<p id='current_temp'>00&#x00B0</p>	
+		<form>
+			<label class="big">Mode</label><br><br>
+			<div class="bigger"> 
+				<input type="radio" name="mode" value="normal"> Normal
+				<input type="radio" name="mode" value="eco"> Eco
+				<input type="radio" name="mode" value="heat"> Heat
+				<input type="radio" name="mode" value="cool"> Cool
+				<input type="radio" name="mode" value="off"> Off
+				<br><br>
+			</div>
+		</form>
+		<form>
+			<label class="big">Fan</label><br><br>
+			<div class="bigger"> 
+				<input type="radio" name="fan_mode" value="auto"> Auto
+				<input type="radio" name="fan_mode" value="on"> On
+				<br><br>
+			</div>
+		</form>
+		<p class="big">HVAC</p>
+		<p><div id='heater'>Heater</div><div id='ac'>AC</div><div id='fan'>Fan</div></p>
+		<button id="refresh">Refresh</button>
+	</div>
+
+    <div class="footer">
+    	<p>Created by Zach Brogan</p>
+      	<br>
+      	<p><a href="https://github.com/zbrogz/thermostat">Github</a></p>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script text="type/javascript" src="/script.js"></script>
+
+</body>
+</html>

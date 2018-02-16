@@ -1,0 +1,72 @@
+body {
+	font-family: 'Arial';
+	padding: 0px 50px 0px 50px;
+	text-align: center;
+}
+
+
+h1 {
+	background-color: #222;
+	color: white;
+	margin: 0px;
+	padding: 40px;
+}
+.main {
+	background-color: #eee;
+	padding: 20px;
+	/*width: 600px;*/
+	text-align: center;
+	margin: auto;
+}
+
+.footer {
+    text-align: center;
+    background-color: #222;
+    color: white;
+    padding: 10px;    
+}
+
+#desired_temp {
+	font-size: 5em;
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+
+#current_temp{
+	font-size: 3em;
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+
+
+#heater, #ac, #fan {
+	font-size: 2em;
+	display: inline-block;
+	margin: 10px;
+	font-weight: bold;
+	color: #999;
+}
+
+#area {
+	font-style: italic;
+	font-size: 3em;
+}
+
+button {
+	width: 10em;
+}
+
+form {
+	margin-top: 40px;
+	margin-bottom: 0px;
+}
+
+.bigger {
+	font-size: 2em;
+	margin-bottom: 0px;
+}
+
+.big {
+	font-weight: lighter;
+	font-size: 1em;
+}
