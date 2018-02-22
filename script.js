@@ -1,13 +1,12 @@
 var state;
 var timeout;
 $(document).ready(function() {
-	getState();
-	// setInterval(getState, 5000)
-
-	$("#refresh").click(function(e) {
-		e.preventDefault();
-		getState();
-	});
+	getThermostat(true);
+	
+	// $("#refresh").click(function(e) {
+	// 	e.preventDefault();
+	// 	getThermostat();
+	// });
 
 	$("#decrease").off().on('click', function(e) {
 		clearTimeout(timeout);
@@ -39,71 +38,89 @@ $(document).ready(function() {
 });
 
 function delayed(func) {
-	timeout = setTimeout(sendState, 2000);
+	timeout = setTimeout(sendState, 1000);
 }
 function sendState() {
+	$(":input").prop("disabled", true);
 	$.ajax({
-		url: "https://y3zh7gr39h.execute-api.us-west-2.amazonaws.com/dev/thermostat/a495136940ec489f8106a51333a4fd9c",
+		url: "https://pouztpq4a1.execute-api.us-west-2.amazonaws.com/dev/thermostat/47b42a430c9b4910910d781f454c1147",
 		type: 'PUT',
 		data: JSON.stringify(state),
 		dataType: "json",
 		success: function(json) {
 			console.log(json);
-			setTimeout(getState, 3000);
+			setTimeout(updateState, 2500);
 	  	}
 	});
 }
 
-function getState() {
+function updateState() {
+	getThermostat(false);
+	getTemperature();
+	getHvac();
+}
+
+function getTemperature() {
 	$.ajax({
-		url: "https://y3zh7gr39h.execute-api.us-west-2.amazonaws.com/dev/thermostat/a495136940ec489f8106a51333a4fd9c",
+		url: state.temperature_url,
 		dataType: "json",
 		success: function(json) {
+			console.log(json);
+			$( "#current_temp" ).text(json.temperature + '\u00B0');
+		}
+	});
+}
+
+function getHvac() {
+	$.ajax({
+		url: state.hvac_url,
+		dataType: "json",
+		success: function(json) {
+			console.log(json);
+			if(json.heater) {
+				$('.main').css('background-color', '#FEE');
+				$('#heater').css('color', '#000')
+				$('#ac').css('color', '#999')
+				$('#fan').css('color', '#000')
+			}
+			else if(json.ac) {
+				$('.main').css('background-color', '#EEF');
+				$('#heater').css('color', '#999')
+				$('#ac').css('color', '#000')
+				$('#fan').css('color', '#000')
+			}
+			else if(json.fan) {
+				$('.main').css('background-color', '#EFF');
+				$('#heater').css('color', '#999')
+				$('#ac').css('color', '#999')
+				$('#fan').css('color', '#000')
+			}
+			else {
+				$('.main').css('background-color', '#EEE');
+				$('#heater').css('color', '#999')
+				$('#ac').css('color', '#999')
+				$('#fan').css('color', '#999')
+			}
+		}
+	});
+}
+
+function getThermostat(update_all) {
+	$.ajax({
+		url: "https://pouztpq4a1.execute-api.us-west-2.amazonaws.com/dev/thermostat/47b42a430c9b4910910d781f454c1147",
+		dataType: "json",
+		success: function(json) {
+			$(":input").prop("disabled", false);
 			console.log(json);
 			state = json;
 			$( "#area" ).text(json.area);
 	    	$( "#desired_temp" ).text(json.desired_temperature + '\u00B0');
 	    	$('input:radio[name=mode]').filter('[value=' + json.mode + ']').prop('checked', true);
-	    	$('input:radio[name=fan_mode]').filter('[value=' + json.fan + ']').prop('checked', true);
-	    	$.ajax({
-				url: state.temperature_url,
-				dataType: "json",
-				success: function(json) {
-					console.log(json);
-					$( "#current_temp" ).text(json.temperature + '\u00B0');
-				}
-			});
-	    	$.ajax({
-				url: state.hvac_url,
-				dataType: "json",
-				success: function(json) {
-					console.log(json);
-					if(json.heater) {
-						$('.main').css('background-color', '#FEE');
-						$('#heater').css('color', '#000')
-						$('#ac').css('color', '#999')
-						$('#fan').css('color', '#000')
-					}
-					else if(json.ac) {
-						$('.main').css('background-color', '#EEF');
-						$('#heater').css('color', '#999')
-						$('#ac').css('color', '#000')
-						$('#fan').css('color', '#000')
-					}
-					else if(json.fan) {
-						$('.main').css('background-color', '#EFF');
-						$('#heater').css('color', '#999')
-						$('#ac').css('color', '#999')
-						$('#fan').css('color', '#000')
-					}
-					else {
-						$('.main').css('background-color', '#EEE');
-						$('#heater').css('color', '#999')
-						$('#ac').css('color', '#999')
-						$('#fan').css('color', '#999')
-					}
-				}
-			});
+			$('input:radio[name=fan_mode]').filter('[value=' + json.fan + ']').prop('checked', true);
+			if(update_all) {
+				getHvac();
+				getTemperature();
+			}
 	  	}
 	});
 }
