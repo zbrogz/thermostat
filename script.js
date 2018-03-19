@@ -32,6 +32,7 @@ $(document).ready(function() {
 
 	$('input:radio[name=fan_mode]').change(function(e) {
 		e.preventDefault();
+		console.log(this.value);
 		state.fan = this.value;
 		sendState();
 	});
@@ -42,6 +43,7 @@ function delayed(func) {
 }
 function sendState() {
 	$(":input").prop("disabled", true);
+	console.log(JSON.stringify(state));
 	$.ajax({
 		url: "https://pouztpq4a1.execute-api.us-west-2.amazonaws.com/dev/thermostat/47b42a430c9b4910910d781f454c1147",
 		type: 'PUT',
@@ -107,7 +109,7 @@ function getHvac() {
 
 function getThermostat(update_all) {
 	$.ajax({
-		url: "https://pouztpq4a1.execute-api.us-west-2.amazonaws.com/dev/thermostat/47b42a430c9b4910910d781f454c1147",
+		url: "https://api.zachbrogan.com/thermostat/47b42a430c9b4910910d781f454c1147",
 		dataType: "json",
 		success: function(json) {
 			$(":input").prop("disabled", false);
