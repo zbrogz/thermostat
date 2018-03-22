@@ -45,7 +45,7 @@ function sendState() {
 	$(":input").prop("disabled", true);
 	console.log(JSON.stringify(state));
 	$.ajax({
-		url: "https://pouztpq4a1.execute-api.us-west-2.amazonaws.com/dev/thermostat/47b42a430c9b4910910d781f454c1147",
+		url: "https://api.zachbrogan.com/thermostat/47b42a430c9b4910910d781f454c1147",
 		type: 'PUT',
 		data: JSON.stringify(state),
 		dataType: "json",
